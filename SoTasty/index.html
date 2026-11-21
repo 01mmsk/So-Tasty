@@ -39,8 +39,9 @@ body.locked { overflow: hidden; }
 .logo-fallback { font-size: 21px; font-weight: 750; letter-spacing: -.8px; }
 
 /* 首屏 */
+/* [fuphock] 首屏背景图：填写 SoTasty_Multimedia/Photo/ 下的文件名，例如 SoTasty/SoTasty_Multimedia/Photo/hero.jpg */
 .hero {
-  min-height: 590px; background: #27221e url("faphotock") center/cover no-repeat;
+  min-height: 590px; background: #27221e url("fuphock") center/cover no-repeat;
   color: #fff; display: flex; flex-direction: column; align-items: center;
   justify-content: center; text-align: center; padding: 80px 20px; position: relative; overflow: hidden;
 }
@@ -177,9 +178,26 @@ footer strong { color: #333; }
 </head>
 
 <body>
+<!--
+  ============================================================
+  说明（给维护者）
+  ------------------------------------------------------------
+  本页位于 SoTasty/index.html。所有相对路径都以本文件所在目录为基准。
+  媒体与链接使用占位符，填写时把占位符替换为真实路径即可：
+    fuphock   -> 照片（SoTasty_Multimedia/Photo/ 下的文件名，例如 Photo/hero.jpg）
+    fuvideock -> 视频（SoTasty_Multimedia/Video/ 下的文件名，例如 Video/hero.mp4）
+    fuwebck   -> 页面链接（例如 ../SoTasty_Menu/SoTasty_Menu.html）
+  菜单页、JSON 等固定路径不使用占位符：
+    - 菜品数据 JSON：../SoTasty.json（JSON 位于仓库根目录）
+  菜品数据（名称、编号、备注、价格、分类、推荐标记）全部从 JSON 读取，
+  修改 JSON 即可更新首页推荐与搜索结果，无需改动本 HTML。
+  ============================================================
+-->
+
 <nav class="navbar" aria-label="Navegación principal">
-  <a href="fa0web0ck" class="logo" aria-label="Inicio">
-    <img src="faphotock" alt="So Tasty">
+  <!-- [fuphock] 导航栏 logo：填写 SoTasty_Multimedia/Photo/ 下的文件名（注意扩展名大小写，例如 .PNG） -->
+  <a href="index.html" class="logo" aria-label="Inicio">
+    <img src="fuphock" alt="So Tasty">
   </a>
   <div class="nav-actions">
     <button class="icon-btn" type="button" onclick="openPanel('search')" aria-label="Buscar">
@@ -195,13 +213,16 @@ footer strong { color: #333; }
 </nav>
 
 <section class="hero">
-  <video autoplay muted loop playsinline poster="faphotock">
-    <source src="favideock" type="video/mp4">
+  <!-- [fuvideock] 首屏视频：填写 SoTasty_Multimedia/Video/ 下的文件名，例如 Video/hero.mp4
+       [fuphock] 首屏视频封面：填写 SoTasty_Multimedia/Photo/ 下的文件名，例如 Photo/hero.jpg -->
+  <video autoplay muted loop playsinline poster="fuphock">
+    <source src="fuvideock" type="video/mp4">
   </video>
   <div class="hero-content">
     <h1>So-Tasty.</h1>
     <p>El sabor que te hace volver.</p>
-    <a class="primary-link" href="fa0web0ck">Descubrir nuestro menú →</a>
+    <!-- [fuwebck] 菜单页链接：填写菜单页相对路径，例如 ../SoTasty_Menu/SoTasty_Menu.html -->
+    <a class="primary-link" href="fuwebck">Descubrir nuestro menú →</a>
   </div>
 </section>
 
@@ -211,16 +232,17 @@ footer strong { color: #333; }
     <p class="section-subtitle">Descubre nuestros sabores favoritos.</p>
   </div>
   <div class="showcase-track" id="showcaseTrack">
+    <!-- 展示卡片 1–3：[fuvideock] 视频文件名（Video/ 下）；[fuphock] 封面图（Photo/ 下） -->
     <article class="showcase-card">
-      <div class="showcase-media"><video autoplay muted loop playsinline preload="metadata" poster="faphotock"><source src="favideock" type="video/mp4"></video></div>
+      <div class="showcase-media"><video autoplay muted loop playsinline preload="metadata" poster="fuphock"><source src="fuvideock" type="video/mp4"></video></div>
       <div class="showcase-copy"><h3>El sabor de la casa.</h3><p>Ingredientes seleccionados. Sabores inolvidables.</p></div>
     </article>
     <article class="showcase-card">
-      <div class="showcase-media"><video autoplay muted loop playsinline preload="metadata" poster="faphotock"><source src="favideock" type="video/mp4"></video></div>
+      <div class="showcase-media"><video autoplay muted loop playsinline preload="metadata" poster="fuphock"><source src="fuvideock" type="video/mp4"></video></div>
       <div class="showcase-copy"><h3>Preparado al momento.</h3><p>Cada detalle cuenta para ofrecerte algo delicioso.</p></div>
     </article>
     <article class="showcase-card">
-      <div class="showcase-media"><video autoplay muted loop playsinline preload="metadata" poster="faphotock"><source src="favideock" type="video/mp4"></video></div>
+      <div class="showcase-media"><video autoplay muted loop playsinline preload="metadata" poster="fuphock"><source src="fuvideock" type="video/mp4"></video></div>
       <div class="showcase-copy"><h3>Momentos para disfrutar.</h3><p>Ven a compartir y descubre tu próximo favorito.</p></div>
     </article>
   </div>
@@ -236,6 +258,7 @@ footer strong { color: #333; }
     <h2>Nuestros favoritos.</h2>
     <p class="section-subtitle">Una selección especial para ti.</p>
   </div>
+  <!-- 推荐菜品由 JS 从 SoTasty.json 生成（isFeatured: true 且 isAvailable: true） -->
   <div class="food-track" id="foodTrack">
     <p class="empty-state">Estamos preparando nuestra selección especial.</p>
   </div>
@@ -243,23 +266,25 @@ footer strong { color: #333; }
     <button class="carousel-arrow" type="button" data-track="foodTrack" data-direction="-1" aria-label="Anterior">‹</button>
     <button class="carousel-arrow" type="button" data-track="foodTrack" data-direction="1" aria-label="Siguiente">›</button>
   </div>
-  <p style="margin-top:18px;"><a class="text-link" href="fa0web0ck">Ver el menú completo →</a></p>
+  <p style="margin-top:18px;"><a class="text-link" href="fuwebck">Ver el menú completo →</a></p>
 </section>
 
 <section class="section">
   <div class="feature">
     <h2>Nuevos sabores.</h2>
     <p>Descubre nuestras novedades.</p>
-    <a class="text-link" href="fa0web0ck">Ver el menú →</a>
+    <a class="text-link" href="fuwebck">Ver el menú →</a>
   </div>
 </section>
 
 <section class="video-section">
   <h2>El arte de cocinar.</h2>
   <p>Descubre cómo preparamos nuestros platos.</p>
+  <!-- [fuvideock] 制作过程视频：填写 SoTasty_Multimedia/Video/ 下的文件名，例如 Video/cooking.mp4
+       [fuphock] 封面图：填写 SoTasty_Multimedia/Photo/ 下的文件名，例如 Photo/cooking.jpg -->
   <div class="video-box">
-    <video controls playsinline preload="metadata" poster="faphotock">
-      <source src="favideock" type="video/mp4">
+    <video controls playsinline preload="metadata" poster="fuphock">
+      <source src="fuvideock" type="video/mp4">
       Tu navegador no puede reproducir este video.
     </video>
   </div>
@@ -278,7 +303,7 @@ footer strong { color: #333; }
     <input class="search-input" id="searchInput" type="search" placeholder="Buscar platos..." oninput="searchFood()">
     <h3>Resultados</h3>
     <div id="searchResults"><p style="color:#888;padding:15px 0;">Escribe el nombre de un plato.</p></div>
-    <p style="margin-top:25px;"><a class="text-link" href="fa0web0ck">Buscar en el menú completo →</a></p>
+    <p style="margin-top:25px;"><a class="text-link" href="fuwebck">Buscar en el menú completo →</a></p>
   </div>
 </div>
 
@@ -306,6 +331,35 @@ footer strong { color: #333; }
 </div>
 
 <script>
+/* ============================================================
+   JSON 接口说明
+   ------------------------------------------------------------
+   数据文件：../SoTasty.json（仓库根目录，文件名后缀为小写 .json）
+   JSON 字段与页面的对应关系：
+     products[].name         -> 菜名（推荐卡片、搜索结果）
+     products[].code         -> 菜品编号（搜索匹配、搜索结果）
+     products[].description  -> 备注（可能不存在，不存在时不显示）
+     products[].price        -> 价格（推荐卡片、搜索结果）
+     products[].currency     -> 货币（缺省时使用 menuData.currency）
+     products[].category     -> 分类 id（搜索匹配分类名称）
+     products[].image        -> 菜品图片，相对于菜单页的媒体目录（见 PRODUCT_IMAGE_BASE）
+     products[].isAvailable  -> 是否可售（为 false 时不在首页显示）
+     products[].isFeatured   -> 是否在首页推荐
+     categories[]            -> 分类导航（id、name、productCount）
+   注意：isNew / isPopular / discount 目前页面未使用，保留以便后续开发。
+   ============================================================ */
+
+/* [fuwebck] 菜单页地址（相对于本页 SoTasty/index.html），例如 ../SoTasty_Menu/SoTasty_Menu.html */
+const MENU_PAGE = "fuwebck";
+
+/* 菜品图片基准路径（相对于本页）。
+   JSON 中 image 字段应写成 "Products/xxx.jpg"，这里会拼接成完整路径。
+   如果 JSON 中 image 仍是旧路径 "images/products/..."，图片将无法显示。 */
+const PRODUCT_IMAGE_BASE = "../SoTasty_Menu/SoTasty_Menu_Multimedia/";
+
+/* JSON 数据文件路径（相对于本页） */
+const MENU_DATA_URL = "../SoTasty.json";
+
 let menuData = null;
 
 function openPanel(id) {
@@ -326,15 +380,27 @@ function escapeHTML(value) {
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
   })[char]);
 }
+
+/* 价格：读取 product.price 与 product.currency */
 function formatPrice(product) {
   const currency = product.currency || (menuData && menuData.currency) || "USD";
   return `$${Number(product.price).toFixed(2)} ${currency}`;
 }
+
+/* 图片：读取 product.image，拼接 PRODUCT_IMAGE_BASE；没有图片时返回空字符串 */
+function productImageSrc(product) {
+  return product.image ? PRODUCT_IMAGE_BASE + product.image : "";
+}
+
 function productCard(product) {
   const description = product.description ? `<p>${escapeHTML(product.description)}</p>` : "";
+  const src = productImageSrc(product);
+  const picture = src
+    ? `<img src="${escapeHTML(src)}" alt="${escapeHTML(product.name)}" loading="lazy" onerror="this.style.display='none'">`
+    : "";
   return `
     <article class="food-card">
-      <div class="food-picture"><img src="faphotock" alt="${escapeHTML(product.name)}" loading="lazy"></div>
+      <div class="food-picture">${picture}</div>
       <div class="food-info">
         <h3>${escapeHTML(product.name)}</h3>
         ${description}
@@ -342,6 +408,8 @@ function productCard(product) {
       </div>
     </article>`;
 }
+
+/* 首页推荐：只显示 isFeatured 且 isAvailable 的菜品 */
 function renderFeatured() {
   const track = document.getElementById("foodTrack");
   const featured = menuData.products.filter(product => product.isAvailable && product.isFeatured);
@@ -351,15 +419,19 @@ function renderFeatured() {
   }
   track.innerHTML = featured.map(productCard).join("");
 }
+
+/* 分类导航：根据 JSON 的 categories 自动生成，点击跳转到菜单页对应分类 */
 function renderCategories() {
   const container = document.getElementById("categoryLinks");
   const categories = menuData.categories || [];
   container.innerHTML =
-    `<a class="category-link" href="fa0web0ck">Menú completo <span>→</span></a>` +
+    `<a class="category-link" href="${MENU_PAGE}">Menú completo <span>→</span></a>` +
     categories.map(category =>
-      `<a class="category-link" href="fa0web0ck">${escapeHTML(category.name)} <span>${Number(category.productCount) || 0} →</span></a>`
+      `<a class="category-link" href="${MENU_PAGE}?category=${encodeURIComponent(category.id)}">${escapeHTML(category.name)} <span>${Number(category.productCount) || 0} →</span></a>`
     ).join("");
 }
+
+/* 搜索：读取全部菜品（不仅是首页推荐），匹配名称、编号、备注和分类名 */
 function searchFood() {
   const input = document.getElementById("searchInput").value.toLocaleLowerCase("es").trim();
   const results = document.getElementById("searchResults");
@@ -382,27 +454,34 @@ function searchFood() {
     results.innerHTML = '<p style="padding:20px 0;color:#888;">No encontramos ese plato en nuestro menú.</p>';
     return;
   }
-  results.innerHTML = matches.map(product => `
+  results.innerHTML = matches.map(product => {
+    const src = productImageSrc(product);
+    const image = src
+      ? `<img src="${escapeHTML(src)}" alt="${escapeHTML(product.name)}" loading="lazy" onerror="this.style.display='none'">`
+      : "";
+    return `
     <article class="search-result-card">
-      <img src="faphotock" alt="${escapeHTML(product.name)}" loading="lazy">
+      ${image}
       <div>
         <h4>${escapeHTML(product.name)}</h4>
         <p>${escapeHTML(product.code)}${product.description ? " · " + escapeHTML(product.description) : ""}</p>
         <strong>${formatPrice(product)}</strong>
       </div>
-    </article>`).join("");
+    </article>`;
+  }).join("");
 }
 
+/* 读取 JSON。失败时显示提示，不影响首页其他内容 */
 async function loadMenuData() {
   const track = document.getElementById("foodTrack");
   try {
-    const response = await fetch("../SoTasty.JSON");
+    const response = await fetch(MENU_DATA_URL);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     menuData = await response.json();
     renderFeatured();
     renderCategories();
   } catch (error) {
-    console.error("No se pudo cargar SoTasty.JSON:", error);
+    console.error("No se pudo cargar SoTasty.json:", error);
     track.innerHTML = '<p class="empty-state">No pudimos cargar el menú. Inténtalo de nuevo más tarde.</p>';
     document.getElementById("categoryLinks").innerHTML =
       '<p class="empty-state">No se pudieron cargar las categorías.</p>';
